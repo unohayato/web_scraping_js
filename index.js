@@ -8,6 +8,7 @@ const app = express();
 
 //ウェブスクレイパー作成
 const URL = "https://search.rakuten.co.jp/search/mall/keyboard/";
+const data = [];
 
 axios(URL)
 .then((response) => {
@@ -18,9 +19,11 @@ axios(URL)
 
   $(".searchresultitem", htmlParser).each(function() {
     const title = $(this).find(".title").text();
-    console.log(title);
+    const price = $(this).find(".important").text();
+    data.push({title, price});
+    console.log(data);
   });
-});
+}).catch(error => console.log(error));
 
 
 
